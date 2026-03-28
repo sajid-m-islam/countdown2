@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Book from "./components/book";
+import FilterGenre from "./components/filterGenre";
 const bookData = {
     fiction: [
         {
@@ -39,13 +40,22 @@ const bookData = {
 };
 
 function App() {
-    const flatBooks = Object.values(bookData).flat();
+    const [filter, setFilter] = useState("all");
+
+    const genres = Object.keys(bookData);
+    const displayedBooks =
+        filter === "all" ? Object.values(bookData).flat() : bookData[filter];
 
     return (
         <>
             <div className="header">Online Bookstore</div>
+            <FilterGenre
+                genres={genres}
+                onSelectGenre={setFilter}
+            ></FilterGenre>
+
             <div className="book-list">
-                {flatBooks.map((book, index) => (
+                {displayedBooks.map((book, index) => (
                     <Book key={index} {...book} />
                 ))}
             </div>
