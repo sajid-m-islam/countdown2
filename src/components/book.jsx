@@ -1,9 +1,11 @@
+// Book component
 export default function (props) {
     return (
         <div className="book-card">
-            <h3>
+            {/* display book information */}
+            <p>
                 {props.title}, {props.author}, {props.price}
-            </h3>
+            </p>
         </div>
     );
 }

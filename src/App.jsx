@@ -1,4 +1,5 @@
 import { useState } from "react";
+// Import components
 import Book from "./components/book";
 import FilterGenre from "./components/filterGenre";
 const bookData = {
@@ -40,20 +41,24 @@ const bookData = {
 };
 
 function App() {
+    // State variable to keep track of genre
     const [filter, setFilter] = useState("all");
-
+    // Get genres from book data
     const genres = Object.keys(bookData);
+    // Set the books that will be displayed based on the selected genre
     const displayedBooks =
         filter === "all" ? Object.values(bookData).flat() : bookData[filter];
 
     return (
         <>
             <div className="header">Online Bookstore</div>
+            {/* Use filter genre component to change which genre is displayed*/}
             <FilterGenre
                 genres={genres}
                 onSelectGenre={setFilter}
+                filter={filter}
             ></FilterGenre>
-
+            {/* Display all the books */}
             <div className="book-list">
                 {displayedBooks.map((book, index) => (
                     <Book key={index} {...book} />
